@@ -1,14 +1,11 @@
 import React from 'react';
 import './App.css';
+import SplashPage from './components/pages/SplashPage/SplashPage';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Yo let's chill.
-        </p>
-      </header>
+      <SplashPage />
     </div>
   );
 }
