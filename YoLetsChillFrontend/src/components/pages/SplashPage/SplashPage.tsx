@@ -7,14 +7,14 @@ const SplashPage = () => {
   const [code, setCode] = React.useState("");
   const navigateToCreateEvent = () => {
     navigate("/create-event");
-  }
+  };
   const navigateToEvent = () => {
     if (code.length === 6) {
-        navigate(`/event/${code}`);
+      navigate(`/event/${code}`);
     } else {
-        alert("Please enter a valid 6-digit code.");
+      alert("Please enter a valid 6-digit code.");
     }
-  }
+  };
 
   return (
     <div className="splash-container">
@@ -24,19 +24,28 @@ const SplashPage = () => {
         <br />
         No group chats. Just vibes.
       </p>
-      <button className="splash-button" onClick={navigateToCreateEvent}>Start Planning!</button>
-      {/* Grayscale divider */}
-      <div className="splash-divider">- or join a group -</div>
+      <div className="splash-button-wrapper">
+        <button className="splash-button" onClick={navigateToCreateEvent}>
+          Start Planning!
+        </button>
+        {/* Grayscale divider */}
+        <div className="splash-divider">- or join a group -</div>
 
-      {/* Input field and submit button side-by-side */}
-      <div className="splash-code-entry">
-        <input
-          className="splash-input"
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          placeholder="Enter the 6-digit code you received"
-        />
-        <button className="splash-button join-button" onClick={navigateToEvent}>Join</button>
+        {/* Input field and submit button side-by-side */}
+        <div className="splash-code-entry">
+          <input
+            className="splash-input"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            placeholder="Enter the 6-digit code you received"
+          />
+          <button
+            className="join-button"
+            onClick={navigateToEvent}
+          >
+            Join
+          </button>
+        </div>
       </div>
 
       <div className="splash-info">
