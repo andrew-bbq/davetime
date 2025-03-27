@@ -7,14 +7,14 @@ const SplashPage = () => {
   const [code, setCode] = React.useState("");
   const navigateToCreateEvent = () => {
     navigate("/create-event");
-  }
+  };
   const navigateToEvent = () => {
     if (code.length === 6) {
-        navigate(`/event/${code}`);
+      navigate(`/event/${code}`);
     } else {
-        alert("Please enter a valid 6-digit code.");
+      alert("Please enter a valid 6-digit code.");
     }
-  }
+  };
 
   return (
     <div className="container">
