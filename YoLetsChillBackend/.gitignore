@@ -6,3 +6,5 @@ build/
 
 ### Kotlin ###
 .kotlin
+
+secrets.yaml

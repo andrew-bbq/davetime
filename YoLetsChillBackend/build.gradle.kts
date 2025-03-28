@@ -36,3 +36,9 @@ kotlin {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+tasks.processResources {
+    from(rootProject.file("secrets.yaml")) {
+        into("")
+    }
+}
