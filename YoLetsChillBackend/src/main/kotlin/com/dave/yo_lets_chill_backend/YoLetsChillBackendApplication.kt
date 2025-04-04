@@ -1,4 +1,4 @@
-package com.dave.yo_lets_chill_backend
+package com.dave.yoletschillbackend
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

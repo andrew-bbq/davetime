@@ -1,4 +1,4 @@
-package com.dave.yo_lets_chill_backend.config
+package com.dave.yoletschillbackend.config
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.PropertySource
