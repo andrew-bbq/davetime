@@ -1,15 +1,30 @@
 import React from "react";
 import "../../../styles/globals.css";
+import { useNavigate } from "react-router-dom";
+
 const SplashPage = () => {
+  const navigate = useNavigate();
+  const [code, setCode] = React.useState("");
+  const navigateToCreateEvent = () => {
+    navigate("/create-event");
+  }
+  const navigateToEvent = () => {
+    if (code.length === 6) {
+        navigate(`/event/${code}`);
+    } else {
+        alert("Please enter a valid 6-digit code.");
+    }
+  }
+
   return (
     <div className="splash-container">
       <h1 className="splash-title">YoLetsChill</h1>
       <p className="splash-description">
-        Plan fun events with friends when everyone’s actually free.
+        Plan fun events with friends when everyones actually free.
         <br />
         No group chats. Just vibes.
       </p>
-      <button className="splash-button">Start Planning!</button>
+      <button className="splash-button" onClick={navigateToCreateEvent}>Start Planning!</button>
       {/* Grayscale divider */}
       <div className="splash-divider">- or join a group -</div>
 
@@ -17,10 +32,11 @@ const SplashPage = () => {
       <div className="splash-code-entry">
         <input
           className="splash-input"
-          type="text"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
           placeholder="Enter the 6-digit code you received"
         />
-        <button className="splash-button join-button">Join</button>
+        <button className="splash-button join-button" onClick={navigateToEvent}>Join</button>
       </div>
 
       <div className="splash-info">
