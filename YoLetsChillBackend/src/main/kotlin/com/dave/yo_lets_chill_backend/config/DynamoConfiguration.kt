@@ -13,9 +13,11 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig
+import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories
 import org.springframework.context.annotation.Primary
 
 @Configuration
+@EnableDynamoDBRepositories(basePackages = ["com.dave.yoletschillbackend.database.repository"])
 public class DynamoConfiguration(
     @Value("\${aws.accessKeyId}") private val accessKey: String,
     @Value("\${aws.secretAccessKey}") private val secretKey: String,
@@ -28,12 +30,13 @@ public class DynamoConfiguration(
     }
 
     @Bean
-    fun dynamoDbClient(awsCredentials: BasicAWSCredentials): DynamoDbClient {
+    fun amazonDynamoDB(): AmazonDynamoDB {
+        val awsCredentials = BasicAWSCredentials(accessKey, secretKey)
         val awsCredentialsProvider = AWSStaticCredentialsProvider(awsCredentials)
-        return DynamoDbClient.builder()
-                .region(Region.of(region))
-                .credentialsProvider(ProfileCredentialsProvider.create())
-                .build()
+        return AmazonDynamoDBClientBuilder.standard()
+            .withCredentials(awsCredentialsProvider)
+            .withRegion(region)
+            .build()
     }
 
     @Bean
