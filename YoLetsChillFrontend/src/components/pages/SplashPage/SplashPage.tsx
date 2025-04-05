@@ -1,6 +1,6 @@
 import React from "react";
 import "../../../App.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const SplashPage = () => {
   const navigate = useNavigate();

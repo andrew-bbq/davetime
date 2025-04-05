@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router";
 import SplashPage from './components/pages/SplashPage/SplashPage';
 import CreateEvent from "./components/pages/CreateEvent/CreateEvent";
 import EventLobby from "./components/pages/EventLobby/EventLobby";
