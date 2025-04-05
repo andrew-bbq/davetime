@@ -1,4 +1,4 @@
-package com.dave.yo_lets_chill_backend
+package com.dave.yoletschillbackend
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
