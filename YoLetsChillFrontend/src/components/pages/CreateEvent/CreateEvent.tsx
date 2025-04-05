@@ -1,44 +1,77 @@
-// src/components/pages/CreateEvent.tsx
-import React, {useState} from "react";
-import "./CreateEvent.css";
+import React from "react";
+import { useForm } from "react-hook-form";
+import "../../../App.scss";
+
+type FormData = {
+  title: string;
+  description: string;
+  displayName: string;
+  email: string;
+  password: string;
+};
 
 const CreateEvent = () => {
-    const [formData, setFormData] = useState({
-        title: "",
-        description: "",
-        displayName: "",
-        email: "",
-        password: "",
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    defaultValues: {
+      title: "",
+      description: "",
+      displayName: "",
+      email: "",
+      password: "",
+    },
+  });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const {name, value} = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value}));
-    }
-    const handleNext = () => {
-        //placeholder for advancing datepicker
-        console.log("proceeding with:", formData);
-    }
+  const onSubmit = (data: FormData) => {
+    console.log("proceeding with:", data);
+    // e.g., navigate to a date-picker step
+  };
+
   return (
-    <div className="create-event-container">
-      <h1>Create Your Hangout</h1>
+    <div className="container">
+      <h1 className="header">Create Your Hangout</h1>
 
-      <label>Title of Hangout</label>
-      <input name="title" value={formData.title} onChange={handleChange} required />
+      <form className="container" onSubmit={handleSubmit(onSubmit)}>
+        <label>
+          Title of Hangout
+          <input {...register("title", { required: "Title is required" })} />
+        </label>
+        {errors.title && <p>{errors.title.message}</p>}
 
-      <label>Description</label>
-      <textarea name="description" value={formData.description} onChange={handleChange} />
+        <label>
+          Description
+          <textarea {...register("description")} />
+        </label>
 
-      <label>Your Display Name</label>
-      <input name="displayName" value={formData.displayName} onChange={handleChange} required />
+        <label>
+          Your Display Name
+          <input
+            {...register("displayName", { required: "Display Name is required" })}
+          />
+        </label>
+        {errors.displayName && <p>{errors.displayName.message}</p>}
 
-      <label>Your Email</label>
-      <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+        <label>
+          Your Email
+          <input
+            type="email"
+            {...register("email", { required: "Email is required" })}
+          />
+        </label>
+        {errors.email && <p>{errors.email.message}</p>}
 
-      <label>Password (optional)</label>
-      <input type="password" name="password" value={formData.password} onChange={handleChange} />
+        <label>
+          Password (optional)
+          <input type="password" {...register("password")} />
+        </label>
 
-      <button onClick={handleNext}>Choose Dates</button>
+        <button type="submit" className="button">
+          Choose Dates
+        </button>
+      </form>
     </div>
   );
 };
