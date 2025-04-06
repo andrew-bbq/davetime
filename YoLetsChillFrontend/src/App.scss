@@ -2,6 +2,11 @@ $forest-green: #1e3d32;
 $forest-green-dark: #2e5e4f;
 $forest-green-darker: #244d40;
 $bg-soft: #e6f0ea;
+$input-bg: #f8fbf9;
+$form-bg: #ffffff;
+$border-radius-lg: 12px;
+$border-radius-sm: 8px;
+$box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 $font-main: "Inter", sans-serif;
 
 .container {
@@ -9,50 +14,91 @@ $font-main: "Inter", sans-serif;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 3rem 2rem;
   min-height: 100vh;
   background-color: $bg-soft;
   color: $forest-green;
   font-family: $font-main;
   text-align: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 550px;
+    background-color: $form-bg;
+    padding: 2.5rem;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow;
+    text-align: left;
+    margin-top: 1.5rem;
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: $forest-green;
+        font-size: 1rem;
+      }
+      
+      input, 
+      textarea {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        border: 1px solid #dde8e2;
+        border-radius: $border-radius-sm;
+        background-color: $input-bg;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        
+        &:focus {
+          outline: none;
+          border-color: $forest-green-dark;
+          box-shadow: 0 0 0 3px rgba($forest-green, 0.15);
+        }
+      }
+      
+      textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+      
+      .error-message {
+        color: #d32f2f;
+        font-size: 0.85rem;
+        margin-top: 0.35rem;
+        display: block;
+      }
+    }
+
+    .button-container {
+      margin-top: 0.5rem;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding: 4rem 3rem;
+
+    form {
+      padding: 3rem;
+    }
+  }
 }
 
 .header {
-  font-size: 2.5rem;
+  font-size: 2.75rem;
   font-weight: 700;
-  margin-bottom: 1rem;
-}
+  margin-bottom: 1.5rem;
+  color: $forest-green-dark;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
 
-.text {
-  max-width: 90%;
-  margin-bottom: 2rem;
-  line-height: 1.6;
-  font-size: 1.2rem;
-}
-
-.divider {
-  margin: 1.5rem 0;
-  color: #666;
-  font-size: 1rem;
-  font-style: italic;
-}
-
-.code-entry {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: stretch;
-  margin-bottom: 1rem;
-  width: 80%;
-  max-width: 500px;
-
-  input {
-    flex: 1;
-    font-size: 1rem;
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    height: 100%;
+  @media (min-width: 768px) {
+    font-size: 3.5rem;
   }
 }
 
@@ -60,91 +106,40 @@ $font-main: "Inter", sans-serif;
   background-color: $forest-green-dark;
   color: #fff;
   border: none;
-  border-radius: 12px;
+  border-radius: $border-radius-lg;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
+  transition: all 0.3s ease;
+  padding: 0.9rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
   white-space: nowrap;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 2px 8px rgba($forest-green-darker, 0.3);
 
   &:hover {
     background-color: $forest-green-darker;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba($forest-green-darker, 0.4);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba($forest-green-darker, 0.3);
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.2rem;
+    padding: 1rem 3rem;
   }
 }
 
-.container form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 90%;
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    text-align: left;
-  }
-  
-  .container form label {
-    display: block;
-    margin-bottom: 0.25rem;
-    font-weight: 600;
-  }
-  
-  .container form input,
-  .container form textarea {
-    width: 100%;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .container form .button {
+.code-entry {
+  flex-direction: row;
+  justify-content: center;
+  input {
+    font-size: 1.1rem;
     margin-top: 1rem;
-    width: 100%;
-  }
-  
-
-@media (min-width: 768px) {
-  .header {
-    font-size: 3.5rem;
-  }
-
-  .text {
-    font-size: 1.5rem;
-  }
-
-  .button {
-    font-size: 1.4rem;
-    padding: 1.2rem 2.5rem;
-  }
-
-  .code-entry {
-    flex-direction: row;
-    justify-content: center;
-
-    input {
-      font-size: 1.1rem;
-    }
-  }
-  .container {
-    padding: 3rem; 
-  }
-
-  .container form {
-    width: 60%;
-    max-width: 600px;
-    margin-top: 2rem; 
-    padding: 2rem; 
+    margin-bottom: 1rem;
   }
 }
-
-@media (min-width: 1200px) {
-    .container form {
-      width: 50%;
-      max-width: 700px; 
-      /* or keep 600px if that feels right */
-    }
-  }
-
