@@ -34,43 +34,99 @@ const CreateEvent = () => {
     <div className="container">
       <h1 className="header">Create Your Hangout</h1>
 
-      <form className="container" onSubmit={handleSubmit(onSubmit)}>
-        <label>
-          Title of Hangout
-          <input {...register("title", { required: "Title is required" })} />
-        </label>
-        {errors.title && <p>{errors.title.message}</p>}
-
-        <label>
-          Description
-          <textarea {...register("description")} />
-        </label>
-
-        <label>
-          Your Display Name
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="form-group">
+          <label htmlFor="title">Title of Hangout</label>
           <input
-            {...register("displayName", { required: "Display Name is required" })}
+            id="title"
+            {...register("title", {
+              required: "Title is required",
+              minLength: {
+                value: 3,
+                message: "Title must be at least 3 characters"
+              },
+              maxLength: {
+                value: 50,
+                message: "Title must not exceed 50 characters"
+              }
+            })}
           />
-        </label>
-        {errors.displayName && <p>{errors.displayName.message}</p>}
+          {errors.title && <span className="error-message">{errors.title.message}</span>}
+        </div>
 
-        <label>
-          Your Email
+        <div className="form-group">
+          <label htmlFor="description">Description</label>
+          <textarea
+            id="description"
+            {...register("description", {
+              maxLength: {
+                value: 500,
+                message: "Description must not exceed 500 characters"
+              }
+            })}
+          />
+          {errors.description && <span className="error-message">{errors.description.message}</span>}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="displayName">Your Display Name</label>
           <input
+            id="displayName"
+            {...register("displayName", {
+              required: "Display Name is required",
+              minLength: {
+                value: 2,
+                message: "Display Name must be at least 2 characters"
+              },
+              maxLength: {
+                value: 30,
+                message: "Display Name must not exceed 30 characters"
+              },
+              pattern: {
+                value: /^[A-Za-z0-9\s._-]+$/,
+                message: "Display Name can only contain letters, numbers, spaces, and basic punctuation"
+              }
+            })}
+          />
+          {errors.displayName && <span className="error-message">{errors.displayName.message}</span>}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="email">Your Email</label>
+          <input
+            id="email"
             type="email"
-            {...register("email", { required: "Email is required" })}
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address"
+              }
+            })}
           />
-        </label>
-        {errors.email && <p>{errors.email.message}</p>}
+          {errors.email && <span className="error-message">{errors.email.message}</span>}
+        </div>
 
-        <label>
-          Password (optional)
-          <input type="password" {...register("password")} />
-        </label>
+        <div className="form-group">
+          <label htmlFor="password">Password (optional)</label>
+          <input
+            id="password"
+            type="password"
+            {...register("password", {
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters"
+              },
+            })}
+          />
+          {errors.password && <span className="error-message">{errors.password.message}</span>}
+        </div>
 
-        <button type="submit" className="button">
-          Choose Dates
-        </button>
+        <div className="button-container">
+          <button type="submit" className="button">
+            Choose Dates
+          </button>
+        </div>
       </form>
     </div>
   );
