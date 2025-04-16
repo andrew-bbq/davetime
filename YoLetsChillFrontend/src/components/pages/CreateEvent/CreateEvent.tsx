@@ -114,8 +114,8 @@ const CreateEvent = () => {
             type="password"
             {...register("password", {
               minLength: {
-                value: 8,
-                message: "Password must be at least 8 characters"
+                value: 1,
+                message: "Password must be at least 1 character"
               },
             })}
           />
