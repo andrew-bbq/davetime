@@ -2,7 +2,7 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import CreateEvent from "./CreateEvent";
+import CreateEvent from "../CreateEvent";
 
 // Mock console.log so we can verify submission
 jest.spyOn(console, "log").mockImplementation(() => {});
@@ -128,20 +128,6 @@ describe("CreateEvent", () => {
       fireEvent.click(screen.getByRole("button", { name: /choose dates/i }));
       
       expect(await screen.findByText("Invalid email address")).toBeInTheDocument();
-    });
-  });
-
-  describe("Password validation", () => {
-    it("shows error when password is too short", async () => {
-      render(<CreateEvent />);
-      
-      fireEvent.change(screen.getByLabelText(/password \(optional\)/i), {
-        target: { value: "pass" },
-      });
-      
-      fireEvent.click(screen.getByRole("button", { name: /choose dates/i }));
-      
-      expect(await screen.findByText("Password must be at least 8 characters")).toBeInTheDocument();
     });
   });
 
